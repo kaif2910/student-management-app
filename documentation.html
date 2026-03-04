@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation - Student Admission Portal</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: auto; padding: 20px; background: #f4f7f6; }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2a5298; border-bottom: 3px solid #2a5298; padding-bottom: 10px; text-align: center; }
+        h2 { color: #1e3c72; margin-top: 40px; background: #eef2f7; padding: 10px; border-left: 5px solid #2a5298; }
+        h3 { color: #2a5298; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-top: 25px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        pre { background: #2d2d2d; color: #ccc; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 14px; }
+        .screenshot-placeholder { border: 2px dashed #bbb; background: #fafafa; height: 250px; display: flex; align-items: center; justify-content: center; margin: 15px 0; color: #888; font-style: italic; border-radius: 8px; }
+        .code-ss-placeholder { border: 2px dashed #2a5298; background: #f0f4f8; height: 200px; display: flex; align-items: center; justify-content: center; margin: 10px 0; color: #2a5298; font-weight: bold; border-radius: 8px; }
+        .command-box { background: #e3f2fd; padding: 15px; border-left: 5px solid #2196f3; font-weight: bold; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #2a5298; color: white; }
+        .page-break { margin-top: 50px; border-top: 2px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Project Documentation: Student Admission Portal</h1>
+
+    <h2>1. Aim of the Project</h2>
+    <p>To develop a <strong>Student Admission & Course Portal</strong> using Angular. This project demonstrates core concepts like <strong>Data Binding, Directives, and Custom Pipes</strong> to manage student records and enrollment status in a meaningful, real-world application.</p>
+
+    <h2>2. Implementation Details (Code & Logic)</h2>
+    <p>Below are the core files used in this project along with their code and placeholders for your code-editor screenshots.</p>
+
+    <!-- SECTION: App Component -->
+    <h3>A. Main Entry (app.ts)</h3>
+    <p>This is the root component that hosts the Student Portal.</p>
+    <pre>
+import { Component } from '@angular/core';
+import { StudentComponent } from './student/student';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [StudentComponent],
+  template: `&lt;app-student&gt;&lt;/app-student&gt;`
+})
+export class App {}</pre>
+    <div class="code-ss-placeholder">[ PASTE SCREENSHOT OF app.ts CODE HERE ]</div>
+
+    <!-- SECTION: Student Logic -->
+    <h3>B. Portal Logic (student.ts)</h3>
+    <p>Handles the admission form logic and student data array.</p>
+    <div class="code-ss-placeholder">[ PASTE SCREENSHOT OF student.ts CODE HERE ]</div>
+
+    <!-- SECTION: HTML Template -->
+    <h3>C. Portal Template (student.html)</h3>
+    <p>The UI structure using <code>ngModel</code>, <code>*ngFor</code>, and <code>*ngIf</code>.</p>
+    <div class="code-ss-placeholder">[ PASTE SCREENSHOT OF student.html CODE HERE ]</div>
+
+    <!-- SECTION: Custom Directive -->
+    <h3>D. Custom Attribute Directive (highlight.ts)</h3>
+    <p>Changes background color on hover using <code>@HostListener</code>.</p>
+    <div class="code-ss-placeholder">[ PASTE SCREENSHOT OF highlight.ts CODE HERE ]</div>
+
+    <!-- SECTION: Custom Pipe -->
+    <h3>E. Custom Pipe (kebab-case-pipe.ts)</h3>
+    <p>Transforms names into URL-friendly slugs.</p>
+    <div class="code-ss-placeholder">[ PASTE SCREENSHOT OF kebab-case-pipe.ts CODE HERE ]</div>
+
+
+    <div class="page-break"></div>
+    <h2>3. Final Project Output (Visuals)</h2>
+    <p>Once the code is implemented, here is how the functional website looks.</p>
+
+    <h3>A. Full Dashboard View</h3>
+    <div class="screenshot-placeholder">[ PASTE SCREENSHOT OF THE FULL BROWSER WINDOW HERE ]</div>
+
+    <h3>B. Admission Form Interaction</h3>
+    <p>Demonstrates Two-Way Data Binding and Property Binding.</p>
+    <div class="screenshot-placeholder">[ PASTE SCREENSHOT OF FILLING THE ADMISSION FORM HERE ]</div>
+
+    <h3>C. Enrollment List with Custom Pipe & Hover</h3>
+    <p>Shows the dynamic table with Currency, Date, and Kebab-Case pipes active.</p>
+    <div class="screenshot-placeholder">[ PASTE SCREENSHOT OF THE STUDENT TABLE HERE ]</div>
+
+    <h2>4. Important Commands Used</h2>
+    <div class="command-box">
+        <p>1. Create Project: <code>ng new student-management-app</code></p>
+        <p>2. Create Component: <code>ng generate component student</code></p>
+        <p>3. Create Directive: <code>ng generate directive highlight</code></p>
+        <p>4. Create Pipe: <code>ng generate pipe kebab-case</code></p>
+        <p>5. Run Server: <code>ng serve</code></p>
+    </div>
+
+    <h2>5. Conclusion</h2>
+    <p>The Student Admission Portal successfully integrates various Angular features into a professional user interface. It proves how technical concepts like pipes and directives can solve real-world data presentation challenges.</p>
+</div>
+
+</body>
+</html>
