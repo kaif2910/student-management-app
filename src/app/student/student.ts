@@ -22,9 +22,7 @@ export class StudentComponent {
 
   // List of registered students
   enrolledStudents = [
-    { name: 'Rupesh', age: 21, date: new Date(), fees: 15000, isActive: true },
-    { name: 'Salman', age: 22, date: new Date(), fees: 12500, isActive: true },
-    { name: 'Alvia', age: 19, date: new Date(), fees: 10000, isActive: false }
+    { name: 'Shaikh Kaif', age: 21, date: new Date(), fees: 15000, isActive: true }
   ];
 
   isFormSubmitted = false;
