@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Angular Learning Portfolio</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: auto; padding: 20px; background: #f0f2f5; }
+        .container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        /* Main Header */
+        .main-header { text-align: center; border-bottom: 4px solid #1a73e8; padding-bottom: 20px; margin-bottom: 40px; }
+        .main-header h1 { color: #1a73e8; margin: 0; font-size: 2.5em; }
+        .main-header p { color: #666; font-size: 1.1em; }
+
+        /* Traditional Table Index */
+        .master-index { width: 100%; border-collapse: collapse; margin-bottom: 50px; background: #fff; }
+        .master-index th { background: #1a73e8; color: white; padding: 15px; text-align: left; border: 1px solid #ddd; font-size: 0.9em; text-transform: uppercase; }
+        .master-index td { padding: 15px; border: 1px solid #ddd; vertical-align: middle; }
+        .master-index tr:hover { background-color: #f8f9fa; }
+        .master-index a { color: #1a73e8; text-decoration: none; font-weight: bold; }
+        .master-index a:hover { text-decoration: underline; }
+
+        /* Project Section Styling */
+        .project-section { margin-top: 60px; padding-top: 40px; border-top: 2px solid #eee; }
+        .project-header { background: #e8f0fe; padding: 15px 25px; border-left: 6px solid #1a73e8; margin-bottom: 30px; border-radius: 0 8px 8px 0; }
+        .project-header h2 { margin: 0; color: #1a73e8; }
+
+        /* Utility Styles */
+        .status-badge { padding: 5px 12px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
+        .status-complete { background: #e6f4ea; color: #1e7e34; }
+        .status-upcoming { background: #fff4e5; color: #c2410c; }
+        .date-col { color: #666; font-size: 0.9em; font-family: monospace; }
+        
+        pre { background: #282c34; color: #abb2bf; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px; }
+        .code-placeholder { border: 2px dashed #1a73e8; background: #f8faff; height: 150px; display: flex; align-items: center; justify-content: center; color: #1a73e8; font-weight: 500; margin: 20px 0; border-radius: 8px; }
+        .screenshot-placeholder { border: 2px dashed #ccc; background: #fafafa; height: 250px; display: flex; align-items: center; justify-content: center; color: #999; font-style: italic; margin: 20px 0; border-radius: 8px; }
+        
+        .command-box { background: #202124; color: #8ab4f8; padding: 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; margin: 20px 0; }
+        .page-break { page-break-before: always; height: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="main-header">
+        <h1>Angular Project Portfolio</h1>
+        <p>Documentation of all projects made during the training</p>
+    </div>
+
+    <!-- TRADITIONAL MASTER INDEX -->
+    <h3>Master Project Index</h3>
+    <table class="master-index">
+        <thead>
+            <tr>
+                <th width="5%">S.No</th>
+                <th width="25%">Project Name</th>
+                <th width="40%">Topics / Concepts Covered</th>
+                <th width="15%">Date</th>
+                <th width="15%">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Project 1 -->
+            <tr>
+                <td>01</td>
+                <td><a href="#project1">Student Admission Portal</a></td>
+                <td>Data Binding, Structural Directives, Custom Pipes, Custom Directives</td>
+                <td class="date-col">March 5, 2026</td>
+                <td><span class="status-badge status-complete">Completed</span></td>
+            </tr>
+            <!-- Project 2 (Placeholder for Tomorrow) -->
+            <tr>
+                <td>02</td>
+                <td><a href="#project2">Upcoming Project A</a></td>
+                <td>Routing, Services, Dependency Injection (Planned)</td>
+                <td class="date-col">March 6, 2026</td>
+                <td><span class="status-badge status-upcoming">Scheduled</span></td>
+            </tr>
+            <!-- Project 3 (Placeholder for Tomorrow) -->
+            <tr>
+                <td>03</td>
+                <td><a href="#project3">Upcoming Project B</a></td>
+                <td>Reactive Forms, API Integration, RxJS (Planned)</td>
+                <td class="date-col">March 6, 2026</td>
+                <td><span class="status-badge status-upcoming">Scheduled</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- PROJECT 1 SECTION -->
+    <div id="project1" class="project-section">
+        <div class="project-header">
+            <h2>01. Student Admission Portal</h2>
+        </div>
+        
+        <h3>A. Project Aim</h3>
+        <p>To develop a portal for managing student records using core Angular features like two-way data binding and custom logic transformations.</p>
+
+        <h3>B. Implementation (Key Files)</h3>
+        
+        <h4>1. Component Logic (student.ts)</h4>
+        <div class="code-placeholder">[ Insert Screenshot of student.ts code here ]</div>
+
+        <h4>2. Template View (student.html)</h4>
+        <div class="code-placeholder">[ Insert Screenshot of student.html code here ]</div>
+
+        <h4>3. Custom Pipe (kebab-case-pipe.ts)</h4>
+        <pre>transform(value: string): string {
+  return value.replace(/\s+/g, '-').toLowerCase();
+}</pre>
+
+        <h3>C. Visual Output</h3>
+        <div class="screenshot-placeholder">[ Full Website Preview Screenshot ]</div>
+        
+        <h3>D. CLI Commands Used</h3>
+        <div class="command-box">
+            > ng generate component student<br>
+            > ng generate directive highlight<br>
+            > ng generate pipe kebab-case
+        </div>
+    </div>
+
+    <div style="text-align: center; color: #aaa; font-size: 0.8em; margin-top: 50px;">
+        End of Documentation Portfolio
+    </div>
+</div>
+
+</body>
+</html>

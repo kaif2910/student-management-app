@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Documentation - Student Admission Portal</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: auto; padding: 20px; background: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 1100px; margin: auto; padding: 20px; background: #f4f7f6; }
         .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { color: #2a5298; border-bottom: 3px solid #2a5298; padding-bottom: 10px; text-align: center; }
         h2 { color: #1e3c72; margin-top: 40px; background: #eef2f7; padding: 10px; border-left: 5px solid #2a5298; }
@@ -20,14 +20,22 @@
         th { background: #2a5298; color: white; }
         .page-break { margin-top: 50px; border-top: 2px solid #eee; padding-top: 20px; }
         
-        /* Index Styles */
-        .index-card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 25px; margin: 30px 0; }
-        .index-card h2 { background: none; border: none; padding: 0; margin-top: 0; color: #2a5298; }
-        .index-list { list-style: none; padding-left: 10px; }
-        .index-list li { margin: 10px 0; }
-        .index-list a { text-decoration: none; color: #1e3c72; font-weight: 500; }
-        .index-list a:hover { color: #2a5298; text-decoration: underline; }
-        .sub-index { list-style: circle; padding-left: 30px; margin-top: 5px; }
+        /* Index Table Styles */
+        .index-table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
+        .index-table th, .index-table td { padding: 12px; text-align: left; border: 1px solid #e0e0e0; vertical-align: middle; }
+        .index-table th { background: #2a5298; color: white; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
+        .index-table tr:nth-child(even) { background: #f8f9fa; }
+        .index-table a { text-decoration: none; color: #1e3c72; font-weight: bold; }
+        .index-table a:hover { color: #2a5298; text-decoration: underline; }
+        .date-badge { background: #e3f2fd; color: #1e3c72; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; }
+        
+        /* Mini Image/Icon Styles for Table */
+        .mini-img { width: 60px; height: 40px; background: #ddd; border: 1px solid #bbb; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #666; font-weight: bold; text-align: center; line-height: 1; }
+        .img-code { background: #f0f4f8; color: #2a5298; border: 1px solid #2a5298; }
+        .img-output { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
+        .img-cmd { background: #fff3e0; color: #e65100; border: 1px solid #e65100; }
+        
+        .index-card { background: #fff; padding: 1px; }
     </style>
 </head>
 <body>
@@ -35,24 +43,85 @@
 <div class="container">
     <h1>Project Documentation: Student Admission Portal</h1>
 
-    <!-- Table of Contents Section -->
+    <!-- Table Type Index Section with Images -->
     <div class="index-card">
-        <h2>Table of Contents (Topics Covered)</h2>
-        <ul class="index-list">
-            <li><a href="#aim">1. Aim of the Project</a></li>
-            <li><a href="#implementation">2. Implementation Details (Code & Logic)</a>
-                <ul class="sub-index">
-                    <li><a href="#app-ts">A. Main Entry (app.ts)</a></li>
-                    <li><a href="#student-ts">B. Portal Logic (student.ts)</a></li>
-                    <li><a href="#student-html">C. Portal Template (student.html)</a></li>
-                    <li><a href="#highlight-ts">D. Custom Attribute Directive (highlight.ts)</a></li>
-                    <li><a href="#pipe-ts">E. Custom Pipe (kebab-case-pipe.ts)</a></li>
-                </ul>
-            </li>
-            <li><a href="#output">3. Final Project Output (Visuals)</a></li>
-            <li><a href="#commands">4. Important Commands Used</a></li>
-            <li><a href="#conclusion">5. Conclusion</a></li>
-        </ul>
+        <h2 style="background:none; border:none; padding:0; margin:0; color:#2a5298;">Project Index & Topics Covered</h2>
+        <table class="index-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Topic / Section Name</th>
+                    <th>Key Concepts</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><div class="mini-img">GOAL</div></td>
+                    <td><a href="#aim">Aim of the Project</a></td>
+                    <td>Project Goals, Angular Overview</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><div class="mini-img img-code">LOGIC</div></td>
+                    <td><a href="#implementation">Implementation Details</a></td>
+                    <td>Logic, Components & Templates</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><div class="mini-img img-code">TS</div></td>
+                    <td><a href="#app-ts">Main Entry (app.ts)</a></td>
+                    <td>Standalone Components</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><div class="mini-img img-code">STUDENT</div></td>
+                    <td><a href="#student-ts">Portal Logic (student.ts)</a></td>
+                    <td>Data Models, Event Handling</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><div class="mini-img img-code">HTML</div></td>
+                    <td><a href="#student-html">Portal Template (student.html)</a></td>
+                    <td>ngModel, *ngFor, *ngIf</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><div class="mini-img img-code">DIR</div></td>
+                    <td><a href="#highlight-ts">Custom Directive (highlight.ts)</a></td>
+                    <td>ElementRef, HostListener</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><div class="mini-img img-code">PIPE</div></td>
+                    <td><a href="#pipe-ts">Custom Pipe (kebab-case-pipe.ts)</a></td>
+                    <td>String Transformation</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><div class="mini-img img-output">PREVIEW</div></td>
+                    <td><a href="#output">Final Project Output</a></td>
+                    <td>Visual Dashboard & UI Flow</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><div class="mini-img img-cmd">CMD</div></td>
+                    <td><a href="#commands">Important Commands</a></td>
+                    <td>CLI, NPM, Workflow</td>
+                    <td><span class="date-badge">March 5, 2026</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <h2 id="aim">1. Aim of the Project</h2>
