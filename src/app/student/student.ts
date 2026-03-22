@@ -243,7 +243,7 @@ export class StudentComponent implements OnInit {
       isActive: true
     }).subscribe(() => {
       this.loadStudents();
-      this.showNotification('✅ Successfully enrolled!');
+      this.showNotification('✅ Student registered successfully');
       this.resetForm();
       this.setView('dashboard');
     });

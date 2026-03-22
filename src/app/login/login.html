@@ -1,0 +1,49 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">🎓</div>
+      <h1>EduPortal Admin</h1>
+      <p>Welcome back! Please login to continue.</p>
+    </div>
+    
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-wrapper">
+          <span class="icon">📧</span>
+          <input 
+            type="email" 
+            id="username" 
+            name="username" 
+            [(ngModel)]="username" 
+            placeholder="kaif@siws73.edu"
+            required
+            #usernameInput="ngModel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <span class="icon">🔒</span>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            [(ngModel)]="password" 
+            placeholder="••••••••"
+            required
+            #passwordInput="ngModel">
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-banner">
+        ⚠️ {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.form.valid" class="login-btn">
+        Login Now
+      </button>
+    </form>
+  </div>
+</div>
