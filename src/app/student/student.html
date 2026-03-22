@@ -1,72 +1,237 @@
-<div class="portal-wrapper">
-  <!-- 1. HEADER SECTION -->
-  <header appHighlight>
-    <h1>🎓 Student Admission & Course Portal</h1>
-    <p>Efficiently Manage Enrollments and Student Profiles</p>
-  </header>
+<div class="app-container">
+  
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar" [class.collapsed]="!isSidebarOpen" @slideIn>
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <span class="sidebar-logo">🏛️</span>
+      </div>
+      <h1 *ngIf="isSidebarOpen" class="brand-name">{{ t.title }}</h1>
+    </div>
 
-  <div class="main-content">
+    <nav class="sidebar-nav">
+      <div class="nav-section-label" *ngIf="isSidebarOpen">CORE</div>
+      <button (click)="setView('dashboard')" [class.active]="activeView === 'dashboard'">
+        <span class="nav-icon">📊</span>
+        <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navDashboard }}</span>
+      </button>
+      
+      <div class="nav-section-label" *ngIf="isSidebarOpen">ADMIN</div>
+      <button (click)="setView('register')" [class.active]="activeView === 'register'">
+        <span class="nav-icon">📝</span>
+        <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navRegister }}</span>
+      </button>
+      <button (click)="setView('departments')" [class.active]="activeView === 'departments'">
+        <span class="nav-icon">🏢</span>
+        <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navDepartments }}</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer" *ngIf="isSidebarOpen">
+      <div class="status-badge">
+        <span class="pulse-dot"></span>
+        {{ t.subtitle }}
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-wrapper">
     
-    <!-- 2. ADMISSION FORM SECTION (Using Two-way Binding) -->
-    <section class="admission-form card">
-      <h2>🆕 New Admission Registration</h2>
-      <div class="form-group">
-        <label>Full Name:</label>
-        <input [(ngModel)]="newStudent.fullName" placeholder="Enter full name...">
-      </div>
-      <div class="form-group">
-        <label>Age:</label>
-        <input type="number" [(ngModel)]="newStudent.age" placeholder="Enter age...">
-      </div>
-      <div class="form-group">
-        <label>Fees (₹):</label>
-        <input type="number" [(ngModel)]="newStudent.fees" placeholder="Enter amount...">
-      </div>
-      <button (click)="enrollStudent()" [disabled]="!newStudent.fullName">Register Student</button>
-      
-      <p *ngIf="isFormSubmitted" class="success-msg">✅ Student registered successfully!</p>
-    </section>
-
-    <!-- 3. STUDENT DASHBOARD (Using *ngFor, Pipes, and Property Binding) -->
-    <section class="enrolled-list card">
-      <h2>📋 Active Enrollment Dashboard</h2>
-      
-      <div *ngIf="enrolledStudents.length === 0" class="no-data">
-        <p>No students enrolled yet. Start registering above!</p>
+    <!-- TOP NAVBAR -->
+    <header class="top-nav glass-effect">
+      <div class="left-tools">
+        <button class="menu-btn ripple" (click)="toggleSidebar()">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="breadcrumb">
+          <span class="bc-parent">EduPortal</span>
+          <span class="bc-sep">/</span>
+          <h2 class="view-title">{{ activeView === 'dashboard' ? t.dashboard : (activeView === 'register' ? t.newAdmission : t.navDepartments) }}</h2>
+        </div>
       </div>
 
-      <table *ngIf="enrolledStudents.length > 0">
-        <thead>
-          <tr>
-            <th>Student Profile (Slug)</th>
-            <th>Age</th>
-            <th>Admission Date</th>
-            <th>Fees Paid</th>
-            <th>Current Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let s of enrolledStudents" [class.inactive-row]="!s.isActive" appHighlight>
-            <!-- Custom Pipe (Kebab Case) for Profile Slug -->
-            <td><strong>{{ s.name | kebabCase }}</strong></td>
-            <td>{{ s.age }}</td>
-            <td>{{ s.date | date:'mediumDate' }}</td>
-            <td>{{ s.fees | currency:'INR' }}</td>
-            <td>
-              <span [class.status-pill]="true" [class.active]="s.isActive" [class.inactive]="!s.isActive">
-                {{ s.isActive ? 'Active' : 'Inactive' }}
-              </span>
-            </td>
-            <td>
-              <button (click)="toggleStatus(s)">
-                {{ s.isActive ? 'Deactivate' : 'Activate' }}
+      <div class="right-tools">
+        <div class="lang-selector">
+          <button *ngFor="let l of availableLangs" (click)="setLanguage(l)" [class.active]="currentLang === l">
+            {{ l.toUpperCase() }}
+          </button>
+        </div>
+        <div class="v-divider"></div>
+        <div class="user-status-orb"></div>
+      </div>
+    </header>
+
+    <div class="view-content">
+      <!-- NOTIFICATION -->
+      <div *ngIf="notificationMessage" class="notification-toast" [ngClass]="{'error': isError}" @fadeAnimation>
+        <span class="toast-icon">{{ isError ? '⚠️' : '🎉' }}</span>
+        {{ notificationMessage }}
+      </div>
+
+      <!-- VIEW 1: DASHBOARD (STUDENT LIST) -->
+      <section *ngIf="activeView === 'dashboard'" @fadeAnimation class="view-section">
+        <div class="view-header">
+          <div class="search-wrap">
+            <span class="search-ico">🔍</span>
+            <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterStudents()" [placeholder]="t.searchPlaceholder">
+          </div>
+        </div>
+
+        <div *ngIf="isLoading" class="loader-wrap">
+          <div class="server-node">
+            <div class="node-pulse"></div>
+            <span class="node-icon">☁️</span>
+          </div>
+          <p class="loading-text">{{ t.loading }}</p>
+        </div>
+
+        <div class="student-grid" *ngIf="!isLoading" [@listAnimation]="filteredStudents.length">
+          <div *ngFor="let s of filteredStudents" class="premium-card student-card" [class.inactive]="!s.isActive">
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="avatar-stack">
+                  <div class="avatar-main">{{ getStudentInitial(s.name) }}</div>
+                  <div class="status-ring" [class.active]="s.isActive"></div>
+                </div>
+                <div class="card-menu">⋮</div>
+              </div>
+              
+              <div class="card-body">
+                <h3 class="student-name" appHighlight>{{ s.name }}</h3>
+                <div class="badge-row">
+                  <span class="premium-badge course-badge" [ngClass]="s.course | kebabCase">{{ s.course }}</span>
+                </div>
+                
+                <div class="info-grid">
+                  <div class="info-box">
+                    <span class="label">{{ t.age }}</span>
+                    <span class="value">{{ s.age }}</span>
+                  </div>
+                  <div class="info-box">
+                    <span class="label">{{ t.fees }}</span>
+                    <span class="value">{{ s.fees | currency:'INR' }}</span>
+                  </div>
+                </div>
+                
+                <div class="date-footer">
+                  <span class="date-ico">📅</span> {{ s.date | date:'mediumDate' }}
+                </div>
+              </div>
+
+              <div class="card-actions">
+                <button (click)="toggleStatus(s)" class="action-btn ripple" [class.danger]="s.isActive" [class.success]="!s.isActive">
+                  {{ s.isActive ? t.deactivate : t.activate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!isLoading && filteredStudents.length === 0" class="empty-state" @fadeAnimation>
+          <span class="empty-icon">📂</span>
+          <p>{{ t.noStudents }}</p>
+        </div>
+      </section>
+
+      <!-- VIEW 2: REGISTRATION FORM -->
+      <section *ngIf="activeView === 'register'" @fadeAnimation class="view-section form-layout">
+        <div class="registration-container">
+          <div class="form-visual">
+            <div class="visual-content">
+              <h2>Join Our Campus</h2>
+              <p>Experience world-class education with Siws University.</p>
+              <div class="visual-stats">
+                <div class="v-stat"><span>50+</span> Courses</div>
+                <div class="v-stat"><span>10k+</span> Students</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-body">
+            <div class="form-header">
+              <h3>{{ t.newAdmission }}</h3>
+              <p>Please fill in the details correctly.</p>
+            </div>
+            
+            <div class="premium-form">
+              <div class="input-field">
+                <label>{{ t.fullName }}</label>
+                <div class="input-wrap">
+                  <span class="input-ico">👤</span>
+                  <input [(ngModel)]="newStudent.fullName" [placeholder]="t.fullName">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="input-field">
+                  <label>{{ t.age }}</label>
+                  <div class="input-wrap">
+                    <span class="input-ico">🎂</span>
+                    <input type="number" [(ngModel)]="newStudent.age" [placeholder]="t.age">
+                  </div>
+                </div>
+                <div class="input-field">
+                  <label>{{ t.fees }}</label>
+                  <div class="input-wrap">
+                    <span class="input-ico">💰</span>
+                    <input type="number" [(ngModel)]="newStudent.fees" [placeholder]="t.fees">
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-field">
+                <label>{{ t.course }}</label>
+                <div class="input-wrap">
+                  <span class="input-ico">🎓</span>
+                  <select [(ngModel)]="newStudent.course">
+                    <option value="Web Development">Web Development</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                  </select>
+                </div>
+              </div>
+              
+              <button class="submit-btn ripple" (click)="enrollStudent()" [disabled]="!newStudent.fullName || isLoading">
+                <span *ngIf="!isLoading">{{ t.register }}</span>
+                <span *ngIf="isLoading" class="spinner">⏳</span>
               </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  </div>
+      <!-- VIEW 3: DEPARTMENTS -->
+      <section *ngIf="activeView === 'departments'" @fadeAnimation class="view-section">
+        <div class="dept-grid">
+          <div *ngFor="let dept of departments" class="premium-card dept-card" [style.border-top-color]="dept.color">
+            <div class="dept-icon-wrap" [style.background-color]="dept.color + '15'">
+              <span class="dept-icon">{{ dept.icon }}</span>
+            </div>
+            <h3 class="dept-name">{{ dept.name }}</h3>
+            <div class="dept-info">
+              <div class="dept-stat">
+                <label>{{ t.deptHod }}</label>
+                <span>{{ dept.hod }}</span>
+              </div>
+              <div class="dept-stat">
+                <label>{{ t.deptStudents }}</label>
+                <span>{{ dept.studentCount }}</span>
+              </div>
+            </div>
+            <div class="dept-progress-wrap">
+              <div class="progress-label">Capacity</div>
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width]="(dept.studentCount/1.5) + '%'" [style.background-color]="dept.color"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 </div>
