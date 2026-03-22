@@ -11,17 +11,17 @@
 
     <nav class="sidebar-nav">
       <div class="nav-section-label" *ngIf="isSidebarOpen">CORE</div>
-      <button (click)="setView('dashboard')" [class.active]="activeView === 'dashboard'">
+      <button (click)="setView('dashboard'); toggleSidebarOnMobile()" [class.active]="activeView === 'dashboard'">
         <span class="nav-icon">📊</span>
         <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navDashboard }}</span>
       </button>
       
       <div class="nav-section-label" *ngIf="isSidebarOpen">ADMIN</div>
-      <button (click)="setView('register')" [class.active]="activeView === 'register'">
+      <button (click)="setView('register'); toggleSidebarOnMobile()" [class.active]="activeView === 'register'">
         <span class="nav-icon">📝</span>
         <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navRegister }}</span>
       </button>
-      <button (click)="setView('departments')" [class.active]="activeView === 'departments'">
+      <button (click)="setView('departments'); toggleSidebarOnMobile()" [class.active]="activeView === 'departments'">
         <span class="nav-icon">🏢</span>
         <span *ngIf="isSidebarOpen" class="nav-text">{{ t.navDepartments }}</span>
       </button>
@@ -35,6 +35,8 @@
     </div>
   </aside>
 
+  <div class="sidebar-backdrop" (click)="toggleSidebar()"></div>
+
   <!-- MAIN CONTENT AREA -->
   <main class="main-wrapper">
     
@@ -47,8 +49,8 @@
           <span class="icon-bar"></span>
         </button>
         <div class="breadcrumb">
-          <span class="bc-parent">EduPortal</span>
-          <span class="bc-sep">/</span>
+          <span class="bc-parent d-none-mobile">EduPortal</span>
+          <span class="bc-sep d-none-mobile">/</span>
           <h2 class="view-title">{{ activeView === 'dashboard' ? t.dashboard : (activeView === 'register' ? t.newAdmission : t.navDepartments) }}</h2>
         </div>
       </div>
@@ -81,10 +83,6 @@
         </div>
 
         <div *ngIf="isLoading" class="loader-wrap">
-          <div class="server-node">
-            <div class="node-pulse"></div>
-            <span class="node-icon">☁️</span>
-          </div>
           <p class="loading-text">{{ t.loading }}</p>
         </div>
 

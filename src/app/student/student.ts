@@ -272,6 +272,12 @@ export class StudentComponent implements OnInit {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
+  toggleSidebarOnMobile() {
+    if (window.innerWidth < 1024) {
+      this.isSidebarOpen = false;
+    }
+  }
+
   setLanguage(lang: 'en' | 'hi' | 'mr' | 'ta') {
     this.currentLang = lang;
   }

@@ -53,13 +53,13 @@ export class StudentService {
       s.id === id ? { ...s, isActive: !s.isActive } : s
     );
     this.studentsSubject.next(updatedList);
-    return of(true).pipe(delay(10));
+    return of(true).pipe(delay(0));
   }
 
   // DELETE: Remove student (additional feature)
   deleteStudent(id: number): Observable<boolean> {
     const updatedList = this.studentsSubject.value.filter(s => s.id !== id);
     this.studentsSubject.next(updatedList);
-    return of(true).pipe(delay(10));
+    return of(true).pipe(delay(0));
   }
 }
