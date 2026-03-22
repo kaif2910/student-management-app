@@ -17,10 +17,11 @@ export class LoginComponent {
   @Output() loginSuccess = new EventEmitter<void>();
 
   onSubmit() {
-    if (this.username === 'kaif@siws73.edu' && this.password === '12345') {
+    // For demonstration: Allow login with any non-empty input
+    if (this.username && this.password) {
       this.loginSuccess.emit();
     } else {
-      this.errorMessage = 'Invalid username or password';
+      this.errorMessage = 'Please enter both username and password';
     }
   }
 }
